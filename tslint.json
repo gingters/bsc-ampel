@@ -1,0 +1,27 @@
+{
+  "extends": "tslint:latest",
+  "rules": {
+    "indent": [true, "tabs"],
+    "member-ordering": [true, {
+      "order": [
+        "private-static-field",
+        "private-instance-field",
+        "protected-static-field",
+        "protected-instance-field",
+        "public-static-field",
+        "public-instance-field",
+        "public-constructor",
+        "protected-constructor",
+        "private-constructor",
+        "public-static-method",
+        "public-instance-method",
+        "protected-static-method",
+        "protected-instance-method",
+        "private-static-method",
+        "private-instance-method"
+      ]
+    }],
+    "object-literal-shorthand": [false, "never"],
+    "quotemark": [true, "single", "avoid-escape"]
+  }
+}

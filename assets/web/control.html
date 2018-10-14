@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>FITA Ampelsteuerung</title>
+	<link rel="stylesheet" href="./bulma.min.css" />
+	<link rel="stylesheet" href="./bulma-switch.min.css" />
+	<link rel="stylesheet" href="./bulma-checkradio.min.css" />
+	<link rel="stylesheet" href="./control.css" />
+</head>
+<body>
+<div class="menu">
+	<div class="tabs is-medium">
+		<ul>
+			<li id="control-tab" class="tablink"><a onclick="selectTab('control')">Ampel</a></li>
+			<li id="settings-tab" class="tablink"><a onclick="selectTab('settings')">Einstellung</a></li>
+			<li id="app-tab" class="tablink"><a onclick="selectTab('app')">App</a></li>
+		</ul>
+	</div>
+	<span id="clock" class="monospace is-size-3"></span>
+</div>
+
+<div id="control-content" class="tabcontent">
+	<div class="control-container">
+		<div id="trafficlight" class="trafficlight">
+			<span id="light-red" class="light red"></span>
+			<span id="light-yellow" class="light yellow"></span>
+			<span id="light-green" class="light green"></span>
+		</div>
+
+		<div class="display">
+			<div id="shooters" class="shooters has-text-weight-bold"></div>
+			<div>Geschossene Passen: <br/><span id="ends" class="monospace is-size-1 has-text-weight-semibold has-text-right"></span></div>
+			<div>Verbleibende Zeit: <br/><span id="remainingTime" class="monospace is-size-1 has-text-weight-semibold has-text-right"></span></div>
+		</div>
+
+		<div class="buttons">
+			<button id="button-start" class="button touch-button is-success is-large is-fullwidth" onclick="startEnd()" disabled>Starte Passe</button>
+			<button id="button-abort" class="button touch-button is-warning is-large is-fullwidth" onclick="endEnd()" disabled>Passe beenden</button>
+			<button id="button-reset" class="button touch-button is-danger is-large is-fullwidth is-outlined" onclick="reset()" disabled>Zurücksetzen</button>
+		</div>
+	</div>
+</div>
+
+<div id="settings-content" class="tabcontent">
+	<h4 class="is-size-4">Einstellungen</h4>
+	<br/>
+	<div class="field is-horizontal has-addons has-addons-right">
+		<div class="field-label is-medium">
+			<label class="label" for="waitTimeInSeconds">Wartezeit (sek.)</label>
+		</div>
+		<div class="control">
+			<input id="waitTimeInSeconds" type="number" class="input is-medium" />
+		</div>
+		<div class="control">
+			<button id="waittime-up" class="button is-medium is-success has-text-weight-bold" onclick="changeWaitTimeInSeconds(1)">&uarr;</button>
+		</div>
+		<div class="control">
+			<button id="waittime-down" class="button is-medium is-info has-text-weight-bold" onclick="changeWaitTimeInSeconds(-1)">&darr;</button>
+		</div>
+	</div>
+
+	<div class="field is-horizontal has-addons has-addons-right">
+		<div class="field-label is-medium">
+			<label class="label" for="yellowPhaseInSeconds">Gelbphase (sek.)</label>
+		</div>
+		<div class="control">
+			<input id="yellowPhaseInSeconds" t ype="number" class="input is-medium" />
+		</div>
+		<div class="control">
+			<button id="yellowphase-up" class="button is-medium is-success has-text-weight-bold" onclick="changeYellowPhaseInSeconds(1)">&uarr;</button>
+		</div>
+		<div class="control">
+			<button id="yellowphase-down" class="button is-medium is-info has-text-weight-bold" onclick="changeYellowPhaseInSeconds(-1)">&darr;</button>
+		</div>
+	</div>
+
+	<div class="field is-horizontal has-addons has-addons-right">
+		<div class="field-label is-medium">
+			<label class="label" for="secondsPerArrow">Sek. pro Pfeil</label>
+		</div>
+		<div class="control">
+			<input id="secondsPerArrow" type="number" class="input is-medium" />
+		</div>
+		<div class="control">
+			<button id="secondsperarrow-up" class="button is-medium is-success has-text-weight-bold" onclick="changeSecondsPerArrow(1)">&uarr;</button>
+		</div>
+		<div class="control">
+			<button id="secondsperarrow-down" class="button is-medium is-info has-text-weight-bold" onclick="changeSecondsPerArrow(-1)">&darr;</button>
+		</div>
+	</div>
+
+	<div class="field is-horizontal has-addons has-addons-right">
+		<div class="field-label is-medium">
+			<label class="label" for="arrowsPerEnd">Pfeile pro Passe</label>
+		</div>
+		<div class="control">
+			<input id="arrowsPerEnd" type="number" class="input is-medium" />
+		</div>
+		<div class="control">
+			<button id="arrowsPerEnd-up" class="button is-medium is-success has-text-weight-bold" onclick="changeArrowsPerEnd(1)">&uarr;</button>
+		</div>
+		<div class="control">
+			<button id="arrowsPerEnd-down" class="button is-medium is-info has-text-weight-bold" onclick="changeArrowsPerEnd(-1)">&darr;</button>
+		</div>
+	</div>
+
+	<div class="field is-horizontal has-addons has-addons-right">
+		<div class="field-label is-medium">
+			<label class="label" for="numberOfEnds">Passen</label>
+		</div>
+		<div class="control">
+			<input id="numberOfEnds" type="number" class="input is-medium" />
+		</div>
+		<div class="control">
+			<button id="numberOfEnds-up" class="button is-medium is-success has-text-weight-bold" onclick="changeNumberOfEnds(1)">&uarr;</button>
+		</div>
+		<div class="control">
+			<button id="numberOfEnds-down" class="button is-medium is-info has-text-weight-bold" onclick="changeNumberOfEnds(-1)">&darr;</button>
+		</div>
+	</div>
+
+	<div class="field is-horizontal has-addons has-addons-right">
+		<input id="alternatingShooters" type="checkbox" class="switch is-success is-medium is-success" onclick="changeAlternatingShooters()" />
+		<label class="label" for="alternatingShooters">Wechselnde Schützen</label>
+	</div>
+
+	<div class="field is-grouped is-grouped-right">
+		<p class="control">
+			<span id="shootingTimeInSeconds" class="tag is-small"></span>
+		</p>
+		<p class="control">
+			<a class="button is-medium" onclick="saveSettings()">Speichern</a>
+		</p>
+		<p class="control">
+			<a class="button is-medium" onclick="loadAllSettings()">Laden</a>
+		</p>
+		<p class="control">
+			<a class="button is-medium is-danger" onclick="deleteAllSettings()">Alles löschen</a>
+		</p>
+	</div>
+</div>
+
+<div id="app-content" class="tabcontent">
+	<div class="field is-grouped is-grouped-left">
+		<p class="control">
+			<a class="button is-medium is-danger" onclick="closeApplication()">Beenden</a>
+		</p>
+		<!--
+		<p class="control">
+			<a class="button is-medium is-info" onclick="startTest()">Steuerung testen</a>
+		</p>
+		-->
+	</div>
+</div>
+<script src="./control.js"></script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+{
+  "name": "bsc-ampel",
+  "version": "1.0.0",
+  "description": "Light control for FITA tournaments",
+  "main": "index.js",
+  "private": true,
+  "scripts": {
+    "lint": "tslint -c tslint.json --project tsconfig.json",
+    "build": "npm run lint && tsc && npm run pack && cpx \"./assets/**/*.*\" \"dist/\"",
+    "node": "npm run build && node ./dist/app.js",
+    "start": "npm run build && electron ./dist/app.js",
+    "start-nobuild": "electron ./dist/app.js",
+    "clean": "rimraf dist",
+    "rebuild": "npm run clean && npm run build",
+    "pack": "webpack",
+    "test": "jasmine",
+    "testDebug": "node $NODE_DEBUG_OPTION ./node_modules/jasmine/bin/jasmine.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gingters/bsc-ampel.git"
+  },
+  "keywords": [
+    "FITA",
+    "light"
+  ],
+  "author": "Sebastian Gingter",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/gingters/bsc-ampel/issues"
+  },
+  "homepage": "https://github.com/gingters/bsc-ampel#readme",
+  "devDependencies": {
+    "@types/websocket": "0.0.39",
+    "cpx": "^1.5.0",
+    "jasmine": "^3.2.0",
+    "rimraf": "^2.6.2",
+    "ts-lint": "^4.5.1",
+    "ts-loader": "^4.5.0",
+    "tsconfig-paths-webpack-plugin": "^3.2.0",
+    "typescript": "^2.9.2",
+    "webpack": "^4.16.5",
+    "webpack-cli": "^3.1.0",
+    "websocket": "^1.0.26"
+  },
+  "dependencies": {
+    "bulma-extensions": "^2.2.1",
+    "electron": "^2.0.8",
+    "electron-rebuild": "^1.8.2",
+    "onoff": "^3.2.1"
+  }
+}

@@ -1,0 +1,84 @@
+html {
+    overflow: hidden;
+}
+body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+}
+
+.menu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.tabs a {
+    padding: .5em, .5em;
+}
+
+.monospace {
+    font-family: 'Fira Code', 'Courier New', Courier, monospace;
+}
+
+.tabcontent {
+    margin: 15px;
+}
+
+.field-label {
+    margin-right: 1.5rem !important;
+    font-size: 1.25rem !important;
+}
+
+.control-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    width: 100%;
+}
+
+.trafficlight {
+    display: flex;
+    flex-direction: column;
+
+    max-width: 140px;
+    background-color: black /* #505050 */;
+    padding: 10px;
+}
+.light {
+    border-radius: 50%;
+    height: 100px;
+    width: 100px;
+    margin: 5px;
+    filter: brightness(50%) grayscale(75%);
+}
+.light.is-active {
+    filter: none;
+}
+
+.red { background-color: red; }
+.yellow { background-color: #ffff4d; }
+.green { background-color: #49fb35; }
+
+.display {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.shooters {
+    font-size: 5em;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+.touch-button {
+    min-height: 100px;
+}
+
+.honk {
+    background-color: darkorange;
+}
