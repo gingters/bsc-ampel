@@ -12,6 +12,8 @@
     "start-nobuild": "electron ./dist/app.js",
     "clean": "rimraf dist",
     "rebuild": "npm run clean && npm run build",
+    "full-rebuild": "npm run electron-rebuild && npm run rebuild",
+    "electron-rebuild": "electron-rebuild",
     "pack": "webpack",
     "test": "jasmine",
     "testDebug": "node $NODE_DEBUG_OPTION ./node_modules/jasmine/bin/jasmine.js"
