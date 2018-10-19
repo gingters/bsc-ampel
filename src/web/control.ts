@@ -67,11 +67,13 @@ function selectTab(tabName: string) {
 	// make all contents invisible
 	const tabContents = Array.from(document.getElementsByClassName('tabcontent'));
 	for (const tabContent of tabContents) {
-		(tabContent as HTMLElement).style.display = 'none';
+		tabContent.classList.remove('is-active');
+		//(tabContent as HTMLElement).style.display = 'none';
 	}
 
 	document.getElementById(tabName + '-tab').classList.add('is-active');
-	document.getElementById(tabName + '-content').style.display = 'block';
+	document.getElementById(tabName + '-content').classList.add('is-active');
+	// document.getElementById(tabName + '-content').style.display = 'flex';
 }
 
 function resetAll() {
