@@ -2,6 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BscAmpel.Hubs;
+using BscAmpel.Models;
+using BscAmpel.Models.Logic;
+using BscAmpel.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.AspNetCore.Hosting;
@@ -27,9 +31,20 @@ namespace BscAmpel
 		public void ConfigureServices(IServiceCollection services)
 		{
 			services
-				.AddCors()
+				.Configure<TournamentOptions>(Configuration.GetSection("Tournament"))
+				.Configure<GpioOptions>(Configuration.GetSection("Gpio"))
+				.AddSingleton<Tournament>()
+				.AddSingleton<HardwareService>()
+				.AddHostedService<TournamentService>()
+				.AddCors();
+
+			services
+				.AddSignalR();
+
+			services
 				.AddControllers()
-				.AddNewtonsoftJson();
+				.AddNewtonsoftJson()
+				;
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -43,8 +58,9 @@ namespace BscAmpel
 			app.UseStaticFiles();
 			app.UseRouting();
 
-			app.UseCors(builder => { builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin().AllowCredentials(); });
+			app.UseCors(builder => { builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin(); });
 			app.UseEndpoints(endpoints => {
+				endpoints.MapHub<TournamentHub>("/tournamentHub");
 				endpoints.MapControllers();
 			});
 		}

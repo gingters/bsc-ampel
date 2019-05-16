@@ -6,6 +6,9 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Serilog;
+using Unosquare.RaspberryIO;
+using Unosquare.WiringPi;
 
 namespace BscAmpel
 {
@@ -13,8 +16,18 @@ namespace BscAmpel
 	{
 		public static async Task<int> Main(string[] args)
 		{
+			Log.Logger = new LoggerConfiguration()
+				.MinimumLevel.Verbose()
+				.Enrich.FromLogContext()
+				.Enrich.WithProperty("Application", "Bsc-Ampel")
+				.WriteTo.Console()
+				.CreateLogger();
+
 			try
 			{
+				// Initialize GPIO Controller library
+				Pi.Init<BootstrapWiringPi>();
+
 				await CreateHostBuilder(args).Build().RunAsync();
 			}
 			catch (Exception ex)
@@ -24,6 +37,7 @@ namespace BscAmpel
 			}
 			finally
 			{
+				Log.CloseAndFlush();
 			}
 
 			return 0;
@@ -33,7 +47,16 @@ namespace BscAmpel
 			Host.CreateDefaultBuilder(args)
 			.ConfigureWebHostDefaults(webBuilder =>
 			{
-				webBuilder.UseStartup<Startup>();
-			});
+				webBuilder.UseKestrel(options => {
+					options.ListenAnyIP(8080);
+				})
+				.ConfigureLogging(loggingBuilder =>
+				{
+					loggingBuilder.AddSerilog();
+				})
+				.UseStartup<Startup>()
+				;
+			})
+			;
 	}
 }

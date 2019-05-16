@@ -4,7 +4,7 @@
     "bsc_ampel": {
       "commandName": "Project",
       "launchBrowser": false,
-      "applicationUrl": "http://localhost:8080",
+      "applicationUrl": "http://0.0.0.0:8080",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
