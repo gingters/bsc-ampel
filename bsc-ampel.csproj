@@ -3,7 +3,7 @@
 	<PropertyGroup>
 		<TargetFramework>netcoreapp3.0</TargetFramework>
 		<RootNamespace>BscAmpel</RootNamespace>
-		<RuntimeIdentifier>linux-arm</RuntimeIdentifier>
+		<RuntimeIdentifiers>win-x64;linux-arm</RuntimeIdentifiers>
 		<LangVersion>7.3</LangVersion>
 	</PropertyGroup>
 
@@ -22,10 +22,11 @@
 		<SshDeployTargetPath>/home/pi/bsc-ampel</SshDeployTargetPath>
 		<SshDeployUsername>pi</SshDeployUsername>
 		<RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+		<SshDeployExecutePermission>true</SshDeployExecutePermission>
 	</PropertyGroup>
 
-	<Target Condition="$(BuildingInsideSshDeploy) ==''" Name="PostBuild" AfterTargets="PostBuildEvent">
+	<Target Condition="$(BuildingInsideSshDeploy) == '' And $(RuntimeIdentifier) == 'linux-arm'" Name="PostBuild" AfterTargets="PostBuildEvent">
 		<Exec Command="cd $(ProjectDir)" />
-		<Exec Command="dotnet-sshdeploy push" />
+		<Exec Command="dotnet-sshdeploy push -r $(RuntimeIdentifier)" />
 	</Target>
 </Project>
