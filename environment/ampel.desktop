@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+Name=Ampelsteuerung
+Comment=Ampelsteuerung
+NoDisplay=false
+Exec=screen -d -m npm run start-nobuild --prefix /home/pi/bsc-ampel
