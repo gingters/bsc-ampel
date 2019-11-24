@@ -1,3 +1,4 @@
+import * as child from 'child_process';
 import { app, BrowserWindow } from 'electron';
 import * as readline from 'readline';
 import { HardwareController } from './hardwareController';
@@ -69,6 +70,10 @@ class Program {
 				case 'close-application':
 					this.stopApplication();
 					break;
+				case 'close-application-and-shutdown':
+					this.triggerShutdown();
+					this.stopApplication();
+					break;
 				case 'save-settings':
 					this.tournament.configure(data.settings);
 					break;
@@ -115,6 +120,10 @@ class Program {
 		}
 	}
 
+	private triggerShutdown() {
+		child.exec('shutdown --poweroff now');
+	}
+
 	private attachElectronAppEvents() {
 		app.on('ready', this.createElectronMainWindow);
 
@@ -136,8 +145,9 @@ class Program {
 		this.mainWindow.loadURL('http://localhost:8080/control.html');
 
 		this.mainWindow.once('ready-to-show', () => {
-			this.mainWindow.maximize();
 			this.mainWindow.show();
+			this.mainWindow.maximize();
+			// this.mainWindow.setFullScreen(true);
 		});
 
 		this.mainWindow.on('closed', () => {

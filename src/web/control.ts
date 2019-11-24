@@ -268,6 +268,10 @@ function closeApplication() {
 	send('ui-command', { command: 'close-application' });
 }
 
+function closeApplicationAndShutdown() {
+	send('ui-command', { command: 'close-application-and-shutdown' });
+}
+
 function saveSettings() {
 	const settings = {
 		alternatingShooters: saveBooleanValue('alternatingShooters', config.alternatingShooters),
@@ -292,6 +296,7 @@ init();
 const wnd = window as any;
 wnd.send = send;
 wnd.closeApplication = closeApplication;
+wnd.closeApplicationAndShutdown = closeApplicationAndShutdown;
 wnd.deleteAllSettings = deleteAllSettings;
 wnd.changeArrowsPerEnd = changeArrowsPerEnd;
 wnd.changeSecondsPerArrow = changeSecondsPerArrow;
