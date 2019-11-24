@@ -68,7 +68,7 @@ function selectTab(tabName: string) {
 	const tabContents = Array.from(document.getElementsByClassName('tabcontent'));
 	for (const tabContent of tabContents) {
 		tabContent.classList.remove('is-active');
-		//(tabContent as HTMLElement).style.display = 'none';
+		// (tabContent as HTMLElement).style.display = 'none';
 	}
 
 	document.getElementById(tabName + '-tab').classList.add('is-active');
