@@ -11,14 +11,24 @@ download the executable.-->
 			<GUIDES horiz='7' vert='5'/>
 			<TITLE>FITA Ampelsteuerung</TITLE>
 			<AUTHOR>Sebastian Gingter</AUTHOR>
-			<REVISION>2.1</REVISION>
+			<REVISION>2.2</REVISION>
 			<DOCNUMBER>1</DOCNUMBER>
 			<ORGANISATION>BSC Zell</ORGANISATION>
-			<SHEETS>1 of 1</SHEETS>
+			<SHEETS>2</SHEETS>
 			<SHOWS>3</SHOWS>
-			<DATE>2018-10-16</DATE>
+			<DATE>2019-11-26</DATE>
 			<GRID spacing='50.00000' snap='1'/>
 		</DETAILS>
+		<FONT id='0'>
+			<HEIGHT>-13</HEIGHT>
+			<WIDTH>6</WIDTH>
+			<WEIGHT>400</WEIGHT>
+			<ITALIC>0</ITALIC>
+			<UNDERLINE>0</UNDERLINE>
+			<STRIKEOUT>0</STRIKEOUT>
+			<CHARSET>0</CHARSET>
+			<FACENAME>Arial</FACENAME>
+		</FONT>
 		<FONT id='1'>
 			<HEIGHT>-10</HEIGHT>
 			<WIDTH>0</WIDTH>
@@ -79,16 +89,6 @@ download the executable.-->
 			<CHARSET>0</CHARSET>
 			<FACENAME>Arial</FACENAME>
 		</FONT>
-		<FONT id='8'>
-			<HEIGHT>-19</HEIGHT>
-			<WIDTH>8</WIDTH>
-			<WEIGHT>400</WEIGHT>
-			<ITALIC>0</ITALIC>
-			<UNDERLINE>0</UNDERLINE>
-			<STRIKEOUT>0</STRIKEOUT>
-			<CHARSET>0</CHARSET>
-			<FACENAME>Arial</FACENAME>
-		</FONT>
 		<FONT id='9'>
 			<HEIGHT>-24</HEIGHT>
 			<WIDTH>11</WIDTH>
@@ -102,6 +102,16 @@ download the executable.-->
 		<FONT id='10'>
 			<HEIGHT>-16</HEIGHT>
 			<WIDTH>7</WIDTH>
+			<WEIGHT>400</WEIGHT>
+			<ITALIC>0</ITALIC>
+			<UNDERLINE>0</UNDERLINE>
+			<STRIKEOUT>0</STRIKEOUT>
+			<CHARSET>0</CHARSET>
+			<FACENAME>Arial</FACENAME>
+		</FONT>
+		<FONT id='11'>
+			<HEIGHT>-21</HEIGHT>
+			<WIDTH>9</WIDTH>
 			<WEIGHT>400</WEIGHT>
 			<ITALIC>0</ITALIC>
 			<UNDERLINE>0</UNDERLINE>
@@ -139,6 +149,11 @@ download the executable.-->
 			<COLOR>FF0000</COLOR>
 			<THICKNESS>1</THICKNESS>
 		</STYLE>
+		<STYLE id='14'>
+			<STYLE>0</STYLE>
+			<COLOR>0000FF</COLOR>
+			<THICKNESS>2</THICKNESS>
+		</STYLE>
 		<FILL id='0'>
 			<INDEX>-1</INDEX>
 			<COLOR>000000</COLOR>
@@ -150,6 +165,10 @@ download the executable.-->
 		<FILL id='2'>
 			<INDEX>0</INDEX>
 			<COLOR>000000</COLOR>
+		</FILL>
+		<FILL id='3'>
+			<INDEX>0</INDEX>
+			<COLOR>AFFFFF</COLOR>
 		</FILL>
 		<SYMBOLDEF id='1'>
 			<NAME type='0'>DIP_20</NAME>
@@ -503,6 +522,9 @@ download the executable.-->
 			<COLOR_NOTETEXT_LINE>FF0000</COLOR_NOTETEXT_LINE>
 			<COLOR_NOTETEXT_TEXT>FF0000</COLOR_NOTETEXT_TEXT>
 		</OPTIONS>
+		<NOTE_TEXT a='5.00000,168.00000' b='162.00000,180.00000' direction='3' style='14' fill='0' font='0' color='000000' border_style='1'>Wichtig:
+
+Alle Pins sind activeLow: Relay schaltet ein, wenn Pin auf Erde gezogen wird, nicht wenn 3,3V am Pin anliegen.</NOTE_TEXT>
 		<SYMBOL id='1' pos='91.00000,81.00000' part='0' rotate='0' can_scale='0' show_power='0' scale_x='1.00000' scale_y='1.00000'>
 			<FIELD type='0' description='Ref' value='' show='0' pos='1.00000,-47.60000'/>
 			<FIELD type='0' description='Name' value='' show='0' pos='1.00000,-50.00000'/>
@@ -707,15 +729,7 @@ download the executable.-->
 		<TEXT pos='98.00000,57.00000' direction='3' font='4' color='000000'>orange</TEXT>
 		<TEXT pos='49.00000,118.00000' direction='3' font='4' color='000000'>rot</TEXT>
 		<TEXT pos='47.00000,32.00000' direction='3' font='4' color='000000'>braun</TEXT>
-		<TEXT pos='236.00000,39.00000' direction='3' font='9' color='404080'>GPIO-Belegung</TEXT>
-		<TEXT pos='236.00000,45.00000' direction='3' font='8' color='000000'>GPIO 05 -- Ampel Rot</TEXT>
-		<TEXT pos='236.00000,50.00000' direction='3' font='8' color='000000'>GPIO 06 -- Ampel Gelb</TEXT>
-		<TEXT pos='236.00000,55.00000' direction='3' font='8' color='000000'>GPIO 12 -- Ampel Grün</TEXT>
-		<TEXT pos='236.00000,60.00000' direction='3' font='8' color='000000'>GPIO 13 -- Schützen A/B</TEXT>
-		<TEXT pos='236.00000,65.00000' direction='3' font='8' color='000000'>GPIO 16 -- Schützen C/D</TEXT>
-		<TEXT pos='236.00000,70.00000' direction='3' font='8' color='000000'>GPIO 17 -- Hupe</TEXT>
-		<TEXT pos='236.00000,75.00000' direction='3' font='8' color='000000'>GPIO 18 -- nicht belegt</TEXT>
-		<TEXT pos='236.00000,80.00000' direction='3' font='8' color='000000'>GPIO 19 -- nicht belegt</TEXT>
+		<TEXT pos='239.00000,32.00000' direction='3' font='9' color='404080'>GPIO-Belegung</TEXT>
 		<SYMBOL id='2' pos='226.00000,140.00000' part='0' rotate='7' can_scale='0' show_power='0' scale_x='1.00000' scale_y='1.00000'>
 			<FIELD type='1' description='Ref' value='B?' show='0' pos='-15.00000,2.00000'/>
 			<FIELD type='0' description='Name' value='         5v DC Netzteil' show='1' pos='-15.00000,-40.00000'/>
@@ -749,11 +763,20 @@ download the executable.-->
 		<TEXT pos='182.00000,62.00000' direction='0' font='4' color='000000'>orange</TEXT>
 		<TEXT pos='162.00000,62.00000' direction='0' font='4' color='000000'>violett</TEXT>
 		<TEXT pos='172.00000,62.00000' direction='0' font='4' color='000000'>grün</TEXT>
-		<NOTE_TEXT a='5.00000,180.00000' b='162.00000,195.00000' direction='3' style='12' fill='0' font='3' color='000000' border_style='1'>Hinweis:
+		<NOTE_TEXT a='5.00000,181.00000' b='162.00000,199.00000' direction='3' style='12' fill='0' font='3' color='000000' border_style='1'>Hinweis:
+
 Das Relay zöge beim Schalten zu viel Strom von der 5V Versorgung des Raspberry Pi, weswegen das Display beim Schalten flackert.
 Deswegen wird das Relay von einem separaten Netzteil mit der Schaltspannung versorgt.
 Achtung: Daher darf GND des Relay auch nicht mit dem Pi verbunden werden.</NOTE_TEXT>
 		<TEXT pos='5.00000,205.00000' direction='3' font='10' color='000000'>Quellcode der Ampel-Steuerungs Software: https://github.com/gingters/bsc-ampel</TEXT>
+		<NOTE_TEXT a='232.00000,33.00000' b='288.00000,73.00000' direction='3' style='12' fill='3' font='11' color='000000' border_style='2'>GPIO 05		Ampel ROT
+GPIO 06		Ampel GELB
+GPIO 12		Ampel GRÜN
+GPIO 13		Schützen A/B
+GPIO 16		Schützen C/D
+GPIO 17		HUPE
+GPIO 18		nicht belegt
+GPIO 19		nicht belegt</NOTE_TEXT>
 	</TinyCAD>
 	<TinyCAD>
 		<NAME>Relay</NAME>
@@ -762,12 +785,12 @@ Achtung: Daher darf GND des Relay auch nicht mit dem Pi verbunden werden.</NOTE_
 			<GUIDES horiz='7' vert='5'/>
 			<TITLE>FITA Ampelsteuerung</TITLE>
 			<AUTHOR>Sebastian Gingter</AUTHOR>
-			<REVISION>2.0</REVISION>
-			<DOCNUMBER>1</DOCNUMBER>
+			<REVISION>2.2</REVISION>
+			<DOCNUMBER>2</DOCNUMBER>
 			<ORGANISATION>BSC Zell</ORGANISATION>
 			<SHEETS>2</SHEETS>
 			<SHOWS>3</SHOWS>
-			<DATE>2018-10-16</DATE>
+			<DATE>2019-11-26</DATE>
 			<GRID spacing='50.00000' snap='1'/>
 		</DETAILS>
 		<FONT id='1'>
