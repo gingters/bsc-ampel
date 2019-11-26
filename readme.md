@@ -13,7 +13,7 @@ Kernel version: 4.19
 Size: 2541 MB
 ```
 
-Folgende Einstellungen nach einer frischen Installation (erster Boot) machen:
+Folgende Einstellungen nach einer frischen Installation (erster Boot), mit normalen Bildschirm und Tastatur/Maus machen:
 
 * Sprache auswählen
 * Passwort für Benutzer `pi` festlegen
@@ -34,6 +34,8 @@ Folgendes Script herunterladen & ausführen:
 ```
 wget -O - https://raw.githubusercontent.com/gingters/bsc-ampel/master/environment/install.sh --no-cache | sudo bash
 ```
+
+Danach System herunterfahren (`sudo shutdown now`), an den Touchscreen und die Steuerung anschliessen (bzw. die SD-Karte in den Steuerungs-Raspberry stecken), und neu starten.
 
 ## Was das Script macht:
 
