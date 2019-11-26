@@ -13,12 +13,21 @@ Kernel version: 4.19
 Size: 2541 MB
 ```
 
-Folgende Einstellungen nach einem frischen reboot machen:
+Folgende Einstellungen nach einer frischen Installation (erster Boot) machen:
 
-* Rechtsklick auf Menüleiste: Leisten-Einstellungen -> Tab Erweitert -> "Leiste bei Nichtbenutzung Minimieren" aktivieren
+* Sprache auswählen
 * Passwort für Benutzer `pi` festlegen
-* SSH Zugriff aktivieren (optional)
+* Rechtsklick auf Menüleiste: Leisten-Einstellungen -> Tab Erweitert -> "Leiste bei Nichtbenutzung Minimieren" aktivieren
 
+Im Terminal über `sudo raspi-config` folgende Einstellungen machen:
+* Networking -> Hostname (Vorschlag: bscampel)
+* Interfacing
+  * I2C aktivieren
+  * SSH Zugriff aktivieren (optional)
+  * VNC Zugriff aktivieren (optional)
+
+Optional:
+  * System aktualisieren (`sudo apt-get update` und `sudo apt-get dist-upgrade`)
 
 Folgendes Script herunterladen & ausführen:
 
@@ -26,10 +35,10 @@ Folgendes Script herunterladen & ausführen:
 wget -O - https://raw.githubusercontent.com/gingters/bsc-ampel/master/environment/install.sh --no-cache | sudo bash
 ```
 
-### What the script does:
+## Was das Script macht:
 
-- For touchscreen support:  
-Add following lines to config.txt in root  
+- Touchscreen-Support aktivieren:  
+  Folgendes wird in config.txt in /boot geschrieben:  
   ```
   max_usb_current=1
   hdmi_force_hotplug=1
@@ -39,28 +48,31 @@ Add following lines to config.txt in root
   hdmi_drive=1
   hdmi_cvt 800 480 60 6 0 0 0
   ```  
-- Install  
+- Installiert folgende Pakete:  
   * node 10.12.0 - `sudo apt get install nodejs`
   * screen - `sudo apt-get install screen`
   * midnight commander - `sudo apt-get install mc`
-- Provide Splash screen
-- Clone the repo
-- Install node dependencies
-- Build the project
-- Add Autostart command 
+- Klont dieses Repo
+- Fügt BSC Logo als Splash screen hinzu
+- Installiert die Node dependencies & baut das Projekt (siehe unten)
+- Fügt Autostart hinzu (siehe unten)
 
-## Build
+## Weitere Infos
+
+### Build
 
 ```
 npm install
 npm run full-rebuild
 ```
 
-## Start
+### Start
 
 `npm run start-nobuild`
 
-## Autostart on Raspberry Pi
+### Autostart
 
 In `~/.config/lxsession/LXDE-pi/autostart` folgendes eintragen:
-`@screen -d -m npm run start-nobuild --prefix /home/pi/bsc-ampel`
+`@/home/pi/bsc-ampel/environment/start.sh`
+
+Falls die Datei noch nicht existiert, sollte `/etc/xdg/lxsession/LXDE-pi/autostart` als Vorlage genommen werden, da diese Datei ignoriert wird wenn eine lokale Autostart existiert, und die Standard-Einträge wichtig sind.
