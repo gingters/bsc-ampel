@@ -47,7 +47,7 @@
   },
   "dependencies": {
     "bulma-extensions": "^2.2.1",
-    "electron": "^2.0.8",
+    "electron": "^11.5.0",
     "electron-rebuild": "^1.8.2",
     "onoff": "^3.2.1"
   }
